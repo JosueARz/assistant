@@ -2,6 +2,8 @@ import pyttsx3
 import datetime
 import speech_recognition as sr
 import pyaudio
+import wikipedia 
+import webbrowser
 
 engine  = pyttsx3.init()
 voice = engine.getProperty('voices')
@@ -73,7 +75,23 @@ if __name__ == "__main__":
         
         if "time" in query:
             time()
+        
         elif 'date' in query:
             date()
+        
         elif 'bye' in query:
             quit()
+        
+        elif 'wikipedia' in query:
+            speak('Searching...')
+            query = query.replace('wikipedia', '')
+            result = wikipedia.summary(query, sentences = 1)
+            speak(result)    
+        
+        elif 'search on internet' in query:
+            speak('What should i search?')
+            chrome_path="C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+            webbrowser.register('chrome', None,webbrowser.BackgroundBrowser(chrome_path))
+            search = (takeCommand().lower() + '.com')
+            print(search)
+            webbrowser.get('chrome').open_new_tab(search)
