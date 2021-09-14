@@ -1,6 +1,7 @@
 import pyttsx3
 import datetime
 import speech_recognition as sr
+import pyaudio
 
 engine  = pyttsx3.init()
 voice = engine.getProperty('voices')
@@ -45,8 +46,6 @@ def  welc():
         
     speak('How can i hel you')
 
-welc()
-
 def takeCommand():
     r = sr.Recognizer()
         
@@ -63,3 +62,18 @@ def takeCommand():
         return "None"
     return text
 takeCommand()
+
+if __name__ == "__main__":
+    
+    welc()
+    
+    while True:
+        query = takeCommand().lower()
+        print(query)
+        
+        if "time" in query:
+            time()
+        elif 'date' in query:
+            date()
+        elif 'bye' in query:
+            quit()
