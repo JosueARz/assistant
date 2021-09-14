@@ -1,5 +1,6 @@
 import pyttsx3
 import datetime
+import speech_recognition as sr
 
 engine  = pyttsx3.init()
 voice = engine.getProperty('voices')
@@ -43,4 +44,22 @@ def  welc():
                 speak('Good night')
         
     speak('How can i hel you')
+
 welc()
+
+def takeCommand():
+    r = sr.Recognizer()
+        
+    with sr.Microphone() as source:
+        r.adjust_for_ambient_noise(source,duration=1)
+        # r.energy_threshold()
+        print("Listening... ")
+        audio= r.listen(source)
+    try:
+        text = r.recognize_google(audio, language = "es-ES")
+        print(text)
+    except:
+        print("sorry, could not recognise")
+        return "None"
+    return text
+takeCommand()
