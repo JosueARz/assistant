@@ -4,6 +4,7 @@ import speech_recognition as sr
 import pyaudio
 import wikipedia 
 import webbrowser
+import os 
 
 engine  = pyttsx3.init()
 voice = engine.getProperty('voices')
@@ -95,3 +96,27 @@ if __name__ == "__main__":
             search = (takeCommand().lower() + '.com')
             print(search)
             webbrowser.get('chrome').open_new_tab(search)
+        
+        elif 'logout' in query:
+            os.system('shutdown - l ')
+            
+        elif 'shutdown' in query:
+            os.system('shutdown /s /t 1')
+            
+        elif 'restart' in query:
+            os.system('shutdown /r /t 1')
+            
+        elif 'remember' in query:
+            speak('What should i remember')
+            data = takeCommand().lower()
+            speak('You say me to remember: ' + data)
+            remember = open('data.txt', 'w')
+            remember.write(data)
+            remember.close()
+        
+        elif 'tell me my reminders' in query:
+            remember = open('data.txt', 'r')
+            speak('you say me to remember')
+            speak(remember.read())
+            
+            
