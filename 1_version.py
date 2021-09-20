@@ -5,6 +5,7 @@ import pyaudio
 import wikipedia 
 import webbrowser
 import os 
+import pyautogui
 
 engine  = pyttsx3.init()
 voice = engine.getProperty('voices')
@@ -66,6 +67,10 @@ def takeCommand():
     return text
 takeCommand()
 
+def screenshot():
+    img = pyautogui.screenshot()
+    img.save('C:\\Users\\gmgar\\Documents\\Data_science\\DT_SC\\github\\asistente de voz\ss.png')
+    ## in thi part, need to put the path where we want save the sreenshot ##
 if __name__ == "__main__":
     
     welc()
@@ -119,4 +124,6 @@ if __name__ == "__main__":
             speak('you say me to remember')
             speak(remember.read())
             
-            
+        elif 'screenshot' in query:
+            screenshot()
+            speak('Done!')
